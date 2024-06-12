@@ -14,7 +14,7 @@ Taken training and validation data from the sources listed below. Note the speci
 - (CC0) sudoku.csv: [https://www.kaggle.com/datasets/rohanrao/sudoku/data](https://www.kaggle.com/datasets/rohanrao/sudoku/data)
 - (CC BY-NC-SA 4.0) sudoku_cluewise.csv: [https://www.kaggle.com/datasets/informoney/4-million-sudoku-puzzles-easytohard](https://www.kaggle.com/datasets/informoney/4-million-sudoku-puzzles-easytohard)
 - (CC0) sudoku-3m.csv: [https://www.kaggle.com/datasets/radcliffe/3-million-sudoku-puzzles-with-ratings](https://www.kaggle.com/datasets/radcliffe/3-million-sudoku-puzzles-with-ratings)
-- (Unknown license) training.txt: [https://www.kaggle.com/datasets/alekseykocherzhenko/sudoku](https://www.kaggle.com/datasets/alekseykocherzhenko/sudoku)
+- (Unknown license) training_puzzles.txt and training_solutions.txt: [https://www.kaggle.com/datasets/alekseykocherzhenko/sudoku](https://www.kaggle.com/datasets/alekseykocherzhenko/sudoku)
 - (CC0) archive: [https://www.kaggle.com/rohanrao/sudoku](https://www.kaggle.com/rohanrao/sudoku)
 
 The data `sudoku_cluewise.csv` is licensed under CC BY-NC-SA 4.0 and thus underlies specific licensing requirements. It was uploaded to Kaggle by the author Ryan An, but is hosted on the author's GitHub at [https://github.com/ryeii/SUdokU](https://github.com/ryeii/SUdokU). The data have been loaded from .csv, formatted, and saved into a .db file together with the data above.

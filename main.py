@@ -19,7 +19,8 @@ def list_tables(db_path):
     return [table[0] for table in tables]
 
 def load_training_data_in_batches(batch_size=128):
-    conn = sqlite3.connect('data\\training.db')
+    db_path = os.path.join('data', 'training.db')
+    conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
     cursor.execute("SELECT puzzle, solution, clue FROM training_data ORDER BY clue DESC")
     while True:
@@ -35,7 +36,8 @@ def load_training_data_in_batches(batch_size=128):
     conn.close()
 
 def load_validation_data():
-    conn = sqlite3.connect('data\\validation.db')
+    db_path = os.path.join('data', 'validation.db')
+    conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
     cursor.execute("SELECT puzzle FROM validation_data")
     puzzles = cursor.fetchall()
@@ -72,7 +74,8 @@ def hyperparameter_tuning():
         project_name='sudoku_tuning'
     )
 
-    log_dir = "logs/fit/" + datetime.now().strftime("%Y%m%d-%H%M%S")
+    # log_dir = "logs/fit/" + datetime.now().strftime("%Y%m%d-%H%M%S")
+    log_dir = os.path.join('logs', 'fit', datetime.now().strftime("%Y%m%d-%H%M%S"))
     tensorboard_callback = TensorBoard(log_dir=log_dir, histogram_freq=1)
 
     for puzzles, solutions, clues in load_training_data_in_batches():
@@ -84,7 +87,8 @@ def hyperparameter_tuning():
 
 def save_validation_results(timestamp, puzzles, correct, total):
     os.makedirs('validation_results', exist_ok=True)
-    conn = sqlite3.connect(f'validation_results\\validation_{timestamp}.db')
+    db_path = os.path.join('validation_results', f'validation_{timestamp}.db')
+    conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
     cursor.execute("CREATE TABLE IF NOT EXISTS results (puzzle TEXT, is_valid INTEGER)")
     for puzzle, is_valid in puzzles:
@@ -117,7 +121,8 @@ def valid_solution(solution):
     return True
 
 def main():
-    model_files = glob.glob('models\\sudoku_*.h5')
+    models_path = os.path.join('models', 'sudoku_*.h5')
+    model_files = glob.glob(models_path)
     if model_files:
         print("Existing model(s) found.")
         choice = input("Do you want to load the latest model? (yes/no): ").strip().lower()
@@ -134,7 +139,8 @@ def main():
 
     timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
     os.makedirs('models', exist_ok=True)
-    model.save(f'models\\sudoku_{timestamp}.h5')
+    model_name = f'sudoku_{timestamp}.h5'
+    model.save(os.path.join('models', model_name))
 
     puzzles = load_validation_data()
     correct = 0
@@ -152,6 +158,6 @@ def main():
     print(f'Validation Accuracy: {correct / total:.2f}')
 
 if __name__ == "__main__":
-    db_path = 'data\\training.db'
+    db_path = os.path.join('data', 'training.db')
     print(f"Tables in {db_path}: {list_tables(db_path)}")
     main()

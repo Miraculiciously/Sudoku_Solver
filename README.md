@@ -6,6 +6,10 @@ Was just playing around with a more or less automatic and ideally smart Sudoku s
 2. Create an environment (say Python 3.11.0) and install requirements via `pip isntall -r requirements.txt`. Activate environment.
 3. Skip this step if you have (other) data already, else download the data from the resources listed below. Unpack the .zip files in the folder `raw_data` and create a homogenised dataset by running `python3 create_sqlite_from_raw_data.py`.
 4. Run `python3 main.py` and enjoy, I guess.
+
+## Usability
+Thus far, code has been tested on a Windows machine. If you see anything, feel free to shoot me a message or use the magic of GitHub :-)
+
 ## Data
 Taken training and validation data from the sources listed below. Note the specific licenses that apply to the individual datasets.
 
